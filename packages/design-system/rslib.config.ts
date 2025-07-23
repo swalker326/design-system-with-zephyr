@@ -7,8 +7,8 @@ import { withZephyr } from "zephyr-rspack-plugin";
 const pluginZephyrRsbuild = (): RsbuildPlugin => ({
   name: "plugin-zephyr-rsbuild",
   setup(api) {
-    api.onBeforeCreateCompiler(({ bundlerConfigs }) => {
-      const zeConfig = withZephyr()(bundlerConfigs[0]);
+    api.onBeforeCreateCompiler(async ({ bundlerConfigs }) => {
+      const zeConfig = await withZephyr()(bundlerConfigs[0]);
     });
   }
 });
@@ -16,35 +16,17 @@ const pluginZephyrRsbuild = (): RsbuildPlugin => ({
 export default defineConfig({
   lib: [
     {
-      format: "esm",
-      dts: true,
-      output: {
-        distPath: {
-          root: "./dist/esm"
-        }
-      }
-    },
-    {
-      format: "cjs",
-      dts: true,
-      output: {
-        distPath: {
-          root: "./dist/cjs"
-        }
-      }
-    },
-    {
       format: "mf",
       output: {
         distPath: {
           root: "./dist/mf"
         },
         // for production, add online assetPrefix here
-        assetPrefix: "http://localhost:3001/mf"
+        assetPrefix: "auto"
       },
       // for Storybook to dev
       dev: {
-        assetPrefix: "http://localhost:3001/mf"
+        assetPrefix: "http://localhost:3001/"
       },
       plugins: [
         pluginModuleFederation(
@@ -52,7 +34,7 @@ export default defineConfig({
             name: "designSystem",
             filename: "remoteEntry.js",
             exposes: {
-              "./button": "./src/components/button.tsx"
+              "./button": "./src/components/ui/button.tsx"
             },
             shared: {
               react: {
@@ -68,7 +50,8 @@ export default defineConfig({
             }
           },
           {}
-        )
+        ),
+        pluginZephyrRsbuild()
       ]
     }
   ],

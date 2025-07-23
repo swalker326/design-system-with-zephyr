@@ -1,18 +1,16 @@
-import React, { useState, Suspense } from "react";
+import React, { Suspense } from "react";
 
-const Button = React.lazy(() =>
-  //@ts-expect-error
+const RemoteButton = React.lazy(() =>
   import("designSystem/button").then((m) => ({ default: m.Button }))
 );
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
-      {/* <Suspense fallback={<div>Loading...</div>}> */}
-        <Button />
-      {/* </Suspense> */}
+      <h1>Design System</h1>
+      <Suspense fallback={<div>Loading Button...</div>}>
+        <RemoteButton>Click </RemoteButton>
+      </Suspense>
     </div>
   );
 }
