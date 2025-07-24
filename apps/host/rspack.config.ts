@@ -13,7 +13,7 @@ export default withZephyr()({
     main: "./src/main.tsx"
   },
   output: {
-    publicPath: "auto",
+    publicPath: "auto"
   },
   resolve: {
     extensions: ["...", ".ts", ".tsx", ".jsx"]
@@ -23,11 +23,6 @@ export default withZephyr()({
       {
         test: /\.svg$/,
         type: "asset"
-      },
-      {
-        test: /\.css$/,
-        use: ["postcss-loader"],
-        type: "css"
       },
       {
         test: /\.(jsx?|tsx?)$/,
