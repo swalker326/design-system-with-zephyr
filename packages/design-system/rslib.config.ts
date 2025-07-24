@@ -34,8 +34,9 @@ export default defineConfig({
             name: "designSystem",
             filename: "remoteEntry.js",
             exposes: {
-              "./button": "./src/components/ui/button.tsx"
+              "./components": "./src/index.ts",
             },
+            dts: true,
             shared: {
               react: {
                 singleton: true,

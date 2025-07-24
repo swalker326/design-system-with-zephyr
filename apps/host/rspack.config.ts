@@ -12,6 +12,9 @@ export default withZephyr()({
   entry: {
     main: "./src/main.tsx"
   },
+  output: {
+    publicPath: "auto",
+  },
   resolve: {
     extensions: ["...", ".ts", ".tsx", ".jsx"]
   },

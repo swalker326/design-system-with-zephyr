@@ -1,6 +1,0 @@
-@import "tailwindcss" source(none);
-@import "tw-animate-css";
-/* import out design system css */
-@import "../../../packages/design-system/src/global.css";
-
-@source "../../../packages/design-system/src/";
